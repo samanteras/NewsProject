@@ -6,40 +6,70 @@
 //
 
 import Foundation
+import RealmSwift
 
 var articles: [Article] = []
+let realm = try! Realm()
+var urlToData: URL {
+    let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] + "/data.json"
+    let urlPath = URL(filePath: path)
+    return urlPath
+}
 
 func loadNews() {
     
     let url = URL(string:
                     "https://newsapi.org/v2/everything?q=tesla&from=2023-01-01&sortBy=publishedAt&apiKey=1f20c5e9a1e644a6b98c21f5e8cc8bca")!
-    var session = URLSession(configuration: .default)
+    let session = URLSession(configuration: .default)
     let task = session.downloadTask(with: url) { urlFile, responce, error in
         if urlFile != nil {
-            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] + "/data.json"
-            let urlPath = URL(filePath: path)
-            try? FileManager.default.copyItem(at: urlFile!, to: urlPath)
-            print(urlPath)
-            parseJson()
-            print(articles.count)
+            
+            try? FileManager.default.copyItem(at: urlFile!, to: urlToData)
+          //  print(urlToData)
+            saveNewsToRealm()
+            let new = realm.objects(News.self)
+            print(new.count)
+            
         }
     }
     task.resume()
+   
 }
 
 func parseJson() {
-    let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] + "/data.json"
-    let urlPath = URL(filePath: path)
     
-    let data = try? Data(contentsOf: urlPath)
-    let rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
-    let array = rootDictionary!["articles"] as! [Dictionary<String, Any>]
-    
-    var returnArray: [Article] = []
-    
-    for dict in array {
-        let newArticle = Article(dictionary: dict)
-        returnArray.append(newArticle)
+    let data = try? Data(contentsOf: urlToData)
+    guard data != nil else {
+        return
     }
-    articles = returnArray
+    let rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
+    if rootDictionary == nil {
+        return
+    }
+    if let array = rootDictionary!["articles"] as? [Dictionary<String, Any>] {
+        var returnArray: [Article] = []
+        for dict in array {
+            let newArticle = Article(dictionary: dict)
+            returnArray.append(newArticle)
+        }
+        articles = returnArray
+    }
 }
+
+func saveNewsToRealm() {
+    
+    let realm = try! Realm()
+    let decoder = JSONDecoder()
+    let data = try? Data(contentsOf: urlToData)
+    let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? Dictionary<String, Any>
+        try! realm.write {
+            if let newsArray = json!["articles"] as? [Dictionary<String, Any>] {
+                for item in newsArray {
+                    let newsItem = News(dictionary: item)
+                    realm.add(newsItem)
+                }
+            }
+        }
+
+}
+
