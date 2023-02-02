@@ -50,6 +50,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="News" largeTitleDisplayMode="always" id="VgB-fD-tEC"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="xw4-cs-KdI">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="pullToRefresh:" destination="YXy-1x-d3v" eventType="valueChanged" id="2by-7f-y6I"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGV-Fr-NSW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

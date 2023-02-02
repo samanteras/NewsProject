@@ -8,7 +8,25 @@
 import Foundation
 import RealmSwift
 
-var articles: [Article] = []
+var articles: [Article] {
+    let data = try? Data(contentsOf: urlToData)
+    guard data != nil else {
+        return []
+    }
+    let rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
+    if rootDictionary == nil {
+        return []
+    }
+    if let array = rootDictionary!["articles"] as? [Dictionary<String, Any>] {
+        var returnArray: [Article] = []
+        for dict in array {
+            let newArticle = Article(dictionary: dict)
+            returnArray.append(newArticle)
+        }
+        return returnArray
+    }
+    return []
+}
 let realm = try! Realm()
 let news = realm.objects(News.self)
 var urlToData: URL {
@@ -31,7 +49,6 @@ func loadNews(competionHandler: (()->Void)?) {
 
             try? FileManager.default.copyItem(at: urlFile!, to: urlToData)
             print(urlToData)
-            parseJson()
             competionHandler?()
             //saveNewsToRealm()
 
@@ -40,26 +57,6 @@ func loadNews(competionHandler: (()->Void)?) {
     }
     task.resume()
    
-}
-
-func parseJson() {
-    
-    let data = try? Data(contentsOf: urlToData)
-    guard data != nil else {
-        return
-    }
-    let rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
-    if rootDictionary == nil {
-        return
-    }
-    if let array = rootDictionary!["articles"] as? [Dictionary<String, Any>] {
-        var returnArray: [Article] = []
-        for dict in array {
-            let newArticle = Article(dictionary: dict)
-            returnArray.append(newArticle)
-        }
-        articles = returnArray
-    }
 }
 
 func saveNewsToRealm() {

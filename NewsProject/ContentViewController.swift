@@ -13,6 +13,7 @@ class ContentViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var pushToBrowser: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,9 @@ class ContentViewController: UIViewController {
                     }
                 }.resume()
             }
+        }
+        if URL(string: article.url) == nil {
+            pushToBrowser.isHidden = true
         }
     }
     

@@ -55,6 +55,7 @@
                         <outlet property="imageView" destination="IKf-FN-scM" id="gFj-mi-SIJ"/>
                         <outlet property="labelDescription" destination="U9Q-5O-TPq" id="Gop-jZ-zIQ"/>
                         <outlet property="labelTitle" destination="wKq-J5-0o2" id="h0p-AQ-n4X"/>
+                        <outlet property="pushToBrowser" destination="GHK-jJ-XC5" id="2jN-hv-htZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
