@@ -17,17 +17,24 @@ var urlToData: URL {
     return urlPath
 }
 
-func loadNews() {
+func loadNews(competionHandler: (()->Void)?) {
     
     let url = URL(string:
                     "https://newsapi.org/v2/everything?q=tesla&from=2023-01-01&sortBy=publishedAt&apiKey=1f20c5e9a1e644a6b98c21f5e8cc8bca")!
     let session = URLSession(configuration: .default)
+//    let task = session.dataTask(with: url) { data, response, error in
+//        if data != nil {
+//        }
+//    }
     let task = session.downloadTask(with: url) { urlFile, responce, error in
         if urlFile != nil {
-            
+
             try? FileManager.default.copyItem(at: urlFile!, to: urlToData)
-          //  print(urlToData)
-            saveNewsToRealm()
+            print(urlToData)
+            parseJson()
+            competionHandler?()
+            //saveNewsToRealm()
+
            // print(news.count)
         }
     }

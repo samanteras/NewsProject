@@ -9,13 +9,13 @@ import Foundation
 import RealmSwift
 
 struct Article {
-    let sourceName: String
-    let author: String
-    let title: String
-    let description: String
-    let url: String
-    let urlToImage: String
-    let publishedAt: String
+    var sourceName: String
+    var author: String
+    var title: String
+    var description: String
+    var url: String
+    var urlToImage: String
+    var publishedAt: String
     
     init(dictionary: Dictionary<String, Any>) {
         author = dictionary["author"] as? String ?? ""

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YXy-1x-d3v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ERS-QT-2Vp">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--News Overview Table View Controller-->
+        <!--News-->
         <scene sceneID="zRK-cH-bJc">
             <objects>
                 <tableViewController id="YXy-1x-d3v" customClass="NewsOverviewTableViewController" customModule="NewsProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,6 +39,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="YXR-tA-g9s" kind="show" identifier="toContent" trigger="accessoryAction" id="bHZ-5g-ZMb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -46,8 +49,37 @@
                             <outlet property="delegate" destination="YXy-1x-d3v" id="JxU-PY-Lxr"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="News" largeTitleDisplayMode="always" id="VgB-fD-tEC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGV-Fr-NSW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1027.6923076923076" y="-22.037914691943126"/>
+        </scene>
+        <!--ContentStoryboard-->
+        <scene sceneID="Tuh-ZE-tRZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ContentStoryboard" id="YXR-tA-g9s" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Wqr-7u-aMu"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U7l-vo-R0W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="-29"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iAO-6j-21q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ERS-QT-2Vp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1E8-bs-1uO">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YXy-1x-d3v" kind="relationship" relationship="rootViewController" id="DWg-Ur-V4i"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vq6-nH-l5H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="98.461538461538453" y="-22.037914691943126"/>
         </scene>

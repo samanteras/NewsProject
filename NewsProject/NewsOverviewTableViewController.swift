@@ -12,11 +12,13 @@ class NewsOverviewTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-           // self.tableView.reloadData()
+        
             loadNews {
-                
-        }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+
+            }
+
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,10 +37,9 @@ class NewsOverviewTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-            let realm = try! Realm()
-            let news = realm.objects(News.self)
+            
             // #warning Incomplete implementation, return the number of rows
-            return news.count
+            return articles.count
         
     }
 
@@ -46,14 +47,27 @@ class NewsOverviewTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             
-            let realm = try! Realm()
-            let news = realm.objects(News.self)
-            let article = news[indexPath.row]
+          
+            let article = articles[indexPath.row]
             cell.textLabel?.text = article.title
             cell.detailTextLabel?.text = article.publishedAt
             
             return cell
         }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toContent", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toContent" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                (segue.destination as? ContentViewController)?.article = articles[indexPath.row]
+                tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+            }
+        }
+    }
+
     
 
     /*
