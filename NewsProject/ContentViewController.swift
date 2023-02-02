@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ContentViewController: UIViewController {
     var article: Article!
@@ -18,16 +19,25 @@ class ContentViewController: UIViewController {
         labelTitle.text = article.title
         labelDescription.text = article.description
         
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             if let url = URL(string: self.article.urlToImage) {
-                if let data = try? Data(contentsOf: url) {
-                    self.imageView.image = UIImage(data: data)
-                }
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = try? Data(contentsOf: url) {
+                        let image = UIImage(data: data)
+                        DispatchQueue.main.async {
+                            self.imageView.image = image
+                        }
+                    }
+                }.resume()
             }
         }
     }
     
     @IBAction func pushToOpenInBrowser(_ sender: Any) {
+        if let url = URL(string: article.url) {
+            let svc = SFSafariViewController(url:url)
+            present(svc, animated: true)
+        }
     }
     
 }
