@@ -30,6 +30,11 @@ class ContentViewController: UIViewController {
                         }
                     }
                 }.resume()
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.imageView.image = UIImage(named: "content")
+                }
             }
         }
         if URL(string: article.url) == nil {

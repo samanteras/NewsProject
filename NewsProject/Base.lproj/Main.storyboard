@@ -16,30 +16,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="YFC-vL-WUU" detailTextLabel="ZgT-rv-yhG" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="WaI-Qw-vFx">
-                                <rect key="frame" x="0.0" y="50" width="390" height="91"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" focusStyle="custom" rowHeight="300" id="WaI-Qw-vFx" customClass="NewsTableViewCell" customModule="NewsProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="390" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WaI-Qw-vFx" id="wVN-ta-QOE">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YFC-vL-WUU">
-                                            <rect key="frame" x="20" y="29.999999999999996" width="25" height="14.333333333333334"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSl-0h-6a9">
+                                            <rect key="frame" x="20" y="246" width="350" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZgT-rv-yhG">
-                                            <rect key="frame" x="19.999999999999996" y="46.333333333333336" width="43.666666666666664" height="14.333333333333334"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nxF-LZ-tY0">
+                                            <rect key="frame" x="20" y="11" width="350" height="230"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="230" id="Q9Z-SU-Lla"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwk-JC-EQ1">
+                                            <rect key="frame" x="20" y="277" width="350" height="15.666666666666686"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="nxF-LZ-tY0" secondAttribute="trailing" id="2hG-Oo-glI"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="vSl-0h-6a9" secondAttribute="trailing" id="4uZ-FG-qaM"/>
+                                        <constraint firstItem="bwk-JC-EQ1" firstAttribute="leading" secondItem="wVN-ta-QOE" secondAttribute="leading" constant="20" symbolic="YES" id="KLb-tf-4uY"/>
+                                        <constraint firstItem="vSl-0h-6a9" firstAttribute="leading" secondItem="wVN-ta-QOE" secondAttribute="leadingMargin" id="OFZ-pK-WVN"/>
+                                        <constraint firstItem="nxF-LZ-tY0" firstAttribute="leading" secondItem="wVN-ta-QOE" secondAttribute="leadingMargin" id="OmT-ZE-YhD"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="vSl-0h-6a9" secondAttribute="bottom" constant="20" id="Veq-UR-cmq"/>
+                                        <constraint firstAttribute="trailing" secondItem="bwk-JC-EQ1" secondAttribute="trailing" constant="20" symbolic="YES" id="VmQ-XJ-c3V"/>
+                                        <constraint firstItem="bwk-JC-EQ1" firstAttribute="top" secondItem="vSl-0h-6a9" secondAttribute="bottom" constant="8" symbolic="YES" id="WGY-Lz-lPl"/>
+                                        <constraint firstItem="nxF-LZ-tY0" firstAttribute="top" secondItem="wVN-ta-QOE" secondAttribute="topMargin" id="WdF-wo-isU"/>
+                                        <constraint firstItem="vSl-0h-6a9" firstAttribute="top" secondItem="nxF-LZ-tY0" secondAttribute="bottom" constant="5" id="sM0-KT-wLH"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="imageNews" destination="nxF-LZ-tY0" id="PdR-hj-Xto"/>
+                                    <outlet property="timeNews" destination="bwk-JC-EQ1" id="U0m-fY-BSX"/>
+                                    <outlet property="titleNews" destination="vSl-0h-6a9" id="GQg-K0-P0S"/>
                                     <segue destination="YXR-tA-g9s" kind="show" identifier="toContent" trigger="accessoryAction" id="bHZ-5g-ZMb"/>
                                 </connections>
                             </tableViewCell>
@@ -51,6 +75,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="News" largeTitleDisplayMode="always" id="VgB-fD-tEC"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="xw4-cs-KdI">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="pullToRefresh:" destination="YXy-1x-d3v" eventType="valueChanged" id="2by-7f-y6I"/>

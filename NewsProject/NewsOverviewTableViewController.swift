@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 class NewsOverviewTableViewController: UITableViewController {
-
+    
     @IBAction func pullToRefresh(_ sender: Any) {
         loadNews {
             DispatchQueue.main.async {
@@ -54,12 +54,26 @@ class NewsOverviewTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            
-          
-            let article = articles[indexPath.row]
-            cell.textLabel?.text = article.title
-            cell.detailTextLabel?.text = article.publishedAt
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewsTableViewCell
+        let article = articles[indexPath.row]
+        if let url = URL(string: article.urlToImage) {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = try? Data(contentsOf: url) {
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        cell.imageNews?.image = image
+                    }
+                }
+            }.resume()
+        } else {
+            DispatchQueue.main.async {
+                cell.imageNews?.image = UIImage(named: "content")
+            }
+        }
+       //     let article = articles[indexPath.row]
+        //cell.imageView?.image = article.urlToImage
+            cell.titleNews.text = article.title
+        cell.timeNews.text = article.publishedAt
             
             return cell
         }
