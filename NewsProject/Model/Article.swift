@@ -8,7 +8,38 @@
 import Foundation
 import RealmSwift
 
-struct Article {
+
+class CheckForList: Object {
+    @objc dynamic var isCheck: Bool = false
+    func changeIsCheckValue(newValue: Bool) {
+          let realm = try! Realm()
+          try! realm.write {
+              self.isCheck = newValue
+          }
+      }
+      
+      func update(checkForList: CheckForList) {
+          let realm = try! Realm()
+          try! realm.write {
+              realm.add(checkForList, update: .modified)
+          }
+      }
+}
+
+//var checkList: [String = <#initializer#>] {
+////    set {
+////        var realm = try! Realm()
+////        var rel = Check()
+////        try! realm.write {
+////            realm.add([newValue])
+////        }
+////    }
+////    get {
+////
+////    }
+//}
+
+class Article {
     var sourceName: String
     var author: String
     var title: String
@@ -16,6 +47,7 @@ struct Article {
     var url: String
     var urlToImage: String
     var publishedAt: String
+    var isCheck: Bool
     
     init(dictionary: Dictionary<String, Any>) {
         author = dictionary["author"] as? String ?? ""
@@ -25,6 +57,8 @@ struct Article {
         urlToImage = dictionary["urlToImage"] as? String ?? ""
         publishedAt = dictionary["publishedAt"] as? String ?? ""
         sourceName = (dictionary["source"] as? Dictionary<String, Any> ?? ["":""])["name"] as? String ?? ""
+        isCheck = dictionary["isCompleted"] as? Bool ?? false
+        
     }
     
 }

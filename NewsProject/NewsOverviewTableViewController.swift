@@ -10,6 +10,19 @@ import RealmSwift
 
 class NewsOverviewTableViewController: UITableViewController {
     
+//    var realm = try! Realm()
+//    var itemsList: CheckForList!
+
+    
+    class CheckList {
+        var name: String
+        var isChaeck: Bool
+        init(name: String, isChaeck: Bool) {
+            self.name = name
+            self.isChaeck = isChaeck
+        }
+    }
+    
     @IBAction func pullToRefresh(_ sender: Any) {
         loadNews {
             DispatchQueue.main.async {
@@ -53,7 +66,28 @@ class NewsOverviewTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewsTableViewCell
+      //  let correntItem = art![indexPath.row]
+    
+        
         let article = articles[indexPath.row]
+//        var checkList = UserDefaults.standard.dictionary(forKey: "checkList")
+//        var checkContent = UserDefaults.standard.object(forKey: "checkList")
+//        print(checkContent)
+//        if let checkList = checkList {
+//            for key in checkList.keys {
+//                print(key)
+//                if key == article.description {
+//                    article.isCheck = true
+//                }
+//            }
+//        }
+        var isChecking: [Int:Any] {
+            var returnCheckList: [Int:Any] = [:]
+            for i in 0..<article.description.count {
+                returnCheckList.updateValue(false, forKey: i)
+            }
+            return returnCheckList
+        }
         if let url = URL(string: article.urlToImage) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let data = try? Data(contentsOf: url) {
@@ -74,16 +108,56 @@ class NewsOverviewTableViewController: UITableViewController {
                 cell.imageNews?.image = UIImage(named: "content")
             }
         }
+//        try! realm.write {
+//           // if let newsArray = json!["articles"] as? [Dictionary<String, Any>] {
+//            for _ in 0..<article.description.count {
+//                let item = CheckForList(value: ["isCheck":false])
+//                    realm.add(item)
+//                }
+//            print(realm.objects(CheckForList.self))
+//            //}
+//        }
+//        var items = realm.objects(CheckForList.self)
+//        itemsList = items[indexPath.row]
+        
+     //   print(isChecking[indexPath.row])
+     //   let currentItem = checkList[indexPath.row]
+   //     var item = checkList[indexPath.row]
+  //      item["isCompleted"] = item["isCompleted"] as? Bool ?? false
+//        checkList[indexPath.row] = item
+        if articles[indexPath.row].isCheck == true {
+            cell.accessoryType = .checkmark
+            
+//            var item = checkList?[article.description]
+//                item = !(item as? Bool ?? false)
+//            checkList?[article.description] = item
+//                UserDefaults.standard.set(checkList, forKey: "checkList")
+//            UserDefaults.standard.synchronize()
+
+//          //  UserDefaults.standard.set(checkList, forKey: "checkList")
+        } else {
+            cell.accessoryType = .none
+        }
        //     let article = articles[indexPath.row]
         //cell.imageView?.image = article.urlToImage
-            cell.titleNews.text = article.title
+        
+        
+        cell.titleNews.text = article.title
         cell.timeNews.text = article.publishedAt
             
             return cell
         }
+    func updateIsCheck(index: Int, isCheck: Bool) {
+        let article = articles[index]
+        article.isCheck = isCheck
+        articles[index] = article
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "toContent", sender: indexPath)
+        updateIsCheck(index: indexPath.row, isCheck: true)
+            print(articles[indexPath.row].isCheck)
+            self.tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

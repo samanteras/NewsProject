@@ -37,8 +37,14 @@ class ContentViewController: UIViewController {
                 URLSession.shared.dataTask(with: url) { (data, response, error) in
                     if let data = try? Data(contentsOf: url) {
                         let image = UIImage(data: data)
-                        DispatchQueue.main.async {
-                            self.imageView.image = image
+                        if image!.size.height > 100 && image!.size.width > 100 {
+                            DispatchQueue.main.async {
+                                self.imageView.image = image
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.imageView.image = UIImage(named: "content")
+                            }
                         }
                     }
                 }.resume()
