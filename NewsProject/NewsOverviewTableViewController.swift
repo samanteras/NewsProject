@@ -46,8 +46,6 @@ class NewsOverviewTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-            
-            // #warning Incomplete implementation, return the number of rows
             return articles.count
         
     }
@@ -60,8 +58,14 @@ class NewsOverviewTableViewController: UITableViewController {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let data = try? Data(contentsOf: url) {
                     let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        cell.imageNews?.image = image
+                    if image!.size.height > 100 && image!.size.width > 100 {
+                        DispatchQueue.main.async {
+                            cell.imageNews?.image = image
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            cell.imageNews?.image = UIImage(named: "content")
+                        }
                     }
                 }
             }.resume()
