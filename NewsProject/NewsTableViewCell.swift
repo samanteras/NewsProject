@@ -13,6 +13,7 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleNews: UILabel!
     @IBOutlet weak var imageNews: UIImageView!
     
+    @IBOutlet weak var imageCheck: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

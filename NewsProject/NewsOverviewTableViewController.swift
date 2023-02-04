@@ -38,9 +38,7 @@ class NewsOverviewTableViewController: UITableViewController {
             loadNews {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-
             }
-
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -127,7 +125,7 @@ class NewsOverviewTableViewController: UITableViewController {
   //      item["isCompleted"] = item["isCompleted"] as? Bool ?? false
 //        checkList[indexPath.row] = item
         if articles[indexPath.row].isCheck == true {
-            cell.accessoryType = .checkmark
+            cell.imageCheck.isHidden = false
             
 //            var item = checkList?[article.description]
 //                item = !(item as? Bool ?? false)
@@ -137,7 +135,7 @@ class NewsOverviewTableViewController: UITableViewController {
 
 //          //  UserDefaults.standard.set(checkList, forKey: "checkList")
         } else {
-            cell.accessoryType = .none
+            cell.imageCheck.isHidden = true
         }
        //     let article = articles[indexPath.row]
         //cell.imageView?.image = article.urlToImage

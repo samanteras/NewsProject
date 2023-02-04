@@ -102,6 +102,7 @@ func loadNews(competionHandler: (()->Void)?) {
         if urlFile != nil {
 
             try? FileManager.default.copyItem(at: urlFile!, to: urlToData)
+            
             print(urlToData)
             parseNews()
             competionHandler?()
@@ -142,11 +143,12 @@ func saveNewsToRealm() {
 }
 
 func parseNews() {
+    
     let data = try? Data(contentsOf: urlToData)
     guard data != nil else {
         return
     }
-    let rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
+    var rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
     if rootDictionary == nil {
         return
     }
