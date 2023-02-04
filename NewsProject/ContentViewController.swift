@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import Kingfisher
 
 class ContentViewController: UIViewController {
     
@@ -21,6 +22,7 @@ class ContentViewController: UIViewController {
     @IBOutlet weak var indicatorNews: UIActivityIndicatorView!
     @IBOutlet weak var labelTime: UILabel!
     
+    @IBOutlet weak var labelAuthor: UILabel!
     override func viewDidLoad() {
         viewTime.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         viewTime.layer.cornerRadius = 15
@@ -31,6 +33,7 @@ class ContentViewController: UIViewController {
         labelTitle.text = article.title
         labelDescription.text = article.description
         labelTime.text = article.publishedAt
+        labelAuthor.text = article.author
         
         DispatchQueue.global().async {
             if let url = URL(string: self.article.urlToImage) {
@@ -39,7 +42,7 @@ class ContentViewController: UIViewController {
                         let image = UIImage(data: data)
                         if image!.size.height > 100 && image!.size.width > 100 {
                             DispatchQueue.main.async {
-                                self.imageView.image = image
+                                self.imageView.kf.setImage(with: url)
                             }
                         } else {
                             DispatchQueue.main.async {

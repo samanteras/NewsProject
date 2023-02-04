@@ -100,13 +100,18 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hE-Ah-n2P">
-                                                <rect key="frame" x="8" y="9" width="243" height="21"/>
+                                                <rect key="frame" x="8" y="9" width="161" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="243" id="R48-JM-SkG"/>
                                                     <constraint firstAttribute="height" constant="21" id="Ydw-i5-UpW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8r-5j-8iq">
+                                                <rect key="frame" x="314" y="10" width="36" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -115,10 +120,14 @@
                                             <constraint firstAttribute="bottom" secondItem="HID-Aq-rJ1" secondAttribute="bottom" id="Dbb-h7-0As"/>
                                             <constraint firstAttribute="trailing" secondItem="HID-Aq-rJ1" secondAttribute="trailing" constant="4" id="FKT-Ey-Agw"/>
                                             <constraint firstAttribute="bottom" secondItem="7hE-Ah-n2P" secondAttribute="bottom" constant="8" id="JbH-0r-joh"/>
+                                            <constraint firstItem="w8r-5j-8iq" firstAttribute="top" secondItem="R8K-Vg-p1a" secondAttribute="top" constant="10" id="O30-cu-eNw"/>
+                                            <constraint firstItem="7hE-Ah-n2P" firstAttribute="width" secondItem="R8K-Vg-p1a" secondAttribute="width" multiplier="0.449721" id="Y4Q-XQ-lkP"/>
                                             <constraint firstItem="HID-Aq-rJ1" firstAttribute="leading" secondItem="R8K-Vg-p1a" secondAttribute="leading" constant="4" id="b9k-C5-dXJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="w8r-5j-8iq" secondAttribute="trailing" constant="8" id="dUL-mx-eN7"/>
                                             <constraint firstItem="7hE-Ah-n2P" firstAttribute="top" secondItem="R8K-Vg-p1a" secondAttribute="top" constant="9" id="jMI-9T-3pH"/>
                                             <constraint firstItem="7hE-Ah-n2P" firstAttribute="leading" secondItem="R8K-Vg-p1a" secondAttribute="leading" constant="8" id="m1c-fT-fsl"/>
                                             <constraint firstItem="7hE-Ah-n2P" firstAttribute="leading" secondItem="R8K-Vg-p1a" secondAttribute="leading" constant="8" id="tND-FY-ygk"/>
+                                            <constraint firstItem="HID-Aq-rJ1" firstAttribute="top" secondItem="w8r-5j-8iq" secondAttribute="bottom" constant="10" id="yqt-eX-jay"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.layerMaxXMaxYCorner">
@@ -135,7 +144,7 @@
                                         </state>
                                         <buttonConfiguration key="configuration" style="filled" title="Open in browser" cornerStyle="dynamic">
                                             <backgroundConfiguration key="background" cornerRadius="0.0"/>
-                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseForegroundColor" red="0.17871248640000001" green="0.65242480120000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -181,6 +190,7 @@
                     <connections>
                         <outlet property="imageView" destination="IKf-FN-scM" id="gFj-mi-SIJ"/>
                         <outlet property="indicatorNews" destination="yJG-lZ-aHh" id="MEw-Lg-un5"/>
+                        <outlet property="labelAuthor" destination="w8r-5j-8iq" id="PlJ-Ic-htz"/>
                         <outlet property="labelDescription" destination="U9Q-5O-TPq" id="Gop-jZ-zIQ"/>
                         <outlet property="labelTime" destination="7hE-Ah-n2P" id="3iC-Zo-Vfq"/>
                         <outlet property="labelTitle" destination="wKq-J5-0o2" id="h0p-AQ-n4X"/>

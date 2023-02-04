@@ -7,4 +7,5 @@ target 'NewsProject' do
 
   # Pods for NewsProject
 	pod 'RealmSwift'
+	pod 'Kingfisher'
 end

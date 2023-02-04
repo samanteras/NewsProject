@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 class NewsOverviewTableViewController: UITableViewController {
     
@@ -93,7 +94,8 @@ class NewsOverviewTableViewController: UITableViewController {
                     let image = UIImage(data: data)
                     if image!.size.height > 100 && image!.size.width > 100 {
                         DispatchQueue.main.async {
-                            cell.imageNews?.image = image
+                            cell.imageNews.kf.setImage(with: url)
+                          //  cell.imageNews?.image = image
                         }
                     } else {
                         DispatchQueue.main.async {
