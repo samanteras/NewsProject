@@ -1,26 +1,16 @@
 PODS:
   - Kingfisher (7.4.0)
-  - Realm (10.34.1):
-    - Realm/Headers (= 10.34.1)
-  - Realm/Headers (10.34.1)
-  - RealmSwift (10.34.1):
-    - Realm (= 10.34.1)
 
 DEPENDENCIES:
   - Kingfisher
-  - RealmSwift
 
 SPEC REPOS:
   trunk:
     - Kingfisher
-    - Realm
-    - RealmSwift
 
 SPEC CHECKSUMS:
   Kingfisher: 596b207973051aae5e4c54a1c1cb39837ea10d36
-  Realm: fe824cd5b183cd55a50a6bcb4bce3ac1650e60b6
-  RealmSwift: c7f668f82982fc8b62366b78b8dc761f15141df6
 
-PODFILE CHECKSUM: b7b0c45514f020e9a266a1a054e44f76e179f7bc
+PODFILE CHECKSUM: 7f504d6112852cbdbff06b8da2aa3db9a5e19623
 
 COCOAPODS: 1.11.3

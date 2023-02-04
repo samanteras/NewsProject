@@ -6,6 +6,5 @@ target 'NewsProject' do
   use_frameworks!
 
   # Pods for NewsProject
-	pod 'RealmSwift'
 	pod 'Kingfisher'
 end
