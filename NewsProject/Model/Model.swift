@@ -150,6 +150,7 @@ func parseNews() {
     if rootDictionary == nil {
         return
     }
+    
     if let array = rootDictionary!["articles"] as? [Dictionary<String, Any>] {
         var returnArray: [Article] = []
         for dict in array {

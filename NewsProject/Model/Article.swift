@@ -55,13 +55,18 @@ class Article {
         description = dictionary["description"] as? String ?? ""
         url = dictionary["url"] as? String ?? ""
         urlToImage = dictionary["urlToImage"] as? String ?? ""
-        publishedAt = dictionary["publishedAt"] as? String ?? ""
+        
         sourceName = (dictionary["source"] as? Dictionary<String, Any> ?? ["":""])["name"] as? String ?? ""
         isCheck = dictionary["isCompleted"] as? Bool ?? false
         
+        let iso8601String = dictionary["publishedAt"] as? String ?? ""
+        let dateFormatter = ISO8601DateFormatter()
+        let date = dateFormatter.date(from: iso8601String)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        publishedAt = formatter.string(from: date!)
+            }
     }
-    
-}
 
 class News: Object, Decodable {
     @objc dynamic var sourceName: String = ""

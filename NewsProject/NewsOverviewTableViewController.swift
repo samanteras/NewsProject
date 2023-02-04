@@ -70,6 +70,7 @@ class NewsOverviewTableViewController: UITableViewController {
     
         
         let article = articles[indexPath.row]
+        //articles.removeAll()
 //        var checkList = UserDefaults.standard.dictionary(forKey: "checkList")
 //        var checkContent = UserDefaults.standard.object(forKey: "checkList")
 //        print(checkContent)
