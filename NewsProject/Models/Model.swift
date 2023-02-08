@@ -8,48 +8,29 @@
 import Foundation
 import Kingfisher
 
-var articles: [Article] = []
+var articleModel: [Article] = []
 
-var urlToData: URL {
-    let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] + "/data.json"
-    let urlPath = URL(filePath: path)
-    return urlPath
-}
-
-func loadNews(competionHandler: (()->Void)?) {
-    let url = URL(string:
-                    "https://newsapi.org/v2/everything?q=tesla&from=2023-01-01&sortBy=publishedAt&apiKey=1f20c5e9a1e644a6b98c21f5e8cc8bca")!
-    let session = URLSession(configuration: .default)
-    let task = session.downloadTask(with: url) { urlFile, responce, error in
-        if urlFile != nil {
-            
-            try? FileManager.default.copyItem(at: urlFile!, to: urlToData)
-            parseNews()
-            competionHandler?()
-        }
-    }
-    task.resume()
-}
-
-func parseNews() {
-    let data = try? Data(contentsOf: urlToData)
-    guard data != nil else {
-        return
-    }
+func loadNews(competionHandler: (()->Void)?){
+    let url = URL(string:"https://newsapi.org/v2/everything?q=apple&from=2023-02-07&to=2023-02-07&sortBy=popularity&apiKey=1f20c5e9a1e644a6b98c21f5e8cc8bca")!
     
-    var rootDictionary = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
-    if rootDictionary == nil {
-        return
-    }
+    var request = URLRequest(url:url)
+    request.httpMethod = "GET"
     
-    if let array = rootDictionary!["articles"] as? [Dictionary<String, Any>] {
-        var returnArray: [Article] = []
-        for dict in array {
-            let newArticle = Article(dictionary: dict)
-            returnArray.append(newArticle)
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil
+        else {
+            return
         }
-        articles = returnArray
-    }
+        
+        let responseJSON = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as? Dictionary<String, Any>
+        if let responseJSON = responseJSON!["articles"] as? [Dictionary<String, Any>] {
+            articleModel.removeAll()
+            for item in responseJSON{
+                articleModel.append(Article(dictionary: item))
+            }
+        }
+        competionHandler?()
+    }.resume()
 }
 
 func getImage(url: String, imageView: UIImageView){
@@ -73,4 +54,10 @@ func getImage(url: String, imageView: UIImageView){
             imageView.image = UIImage(named: "content")
         }
     }
+}
+
+func updateIsCheck(index: Int, isCheck: Bool) {
+    var article = articleModel[index]
+    article.isCheck = isCheck
+    articleModel[index] = article
 }

@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-class Article {
+struct Article: Codable {
     var sourceName: String
     var author: String
     var title: String
